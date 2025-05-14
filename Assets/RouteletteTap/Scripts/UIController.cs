@@ -8,9 +8,22 @@ public class UIController : MonoBehaviour
     [SerializeField] private NumberButton[] _buttons;
     [SerializeField] private int _buttonsCount;
 
-    private System.Random _random = new System.Random();
+    #region Taps
 
-    public void UpdateTapText()
+    public void AnimateAndUpdateTapText()
+    {
+        RectTransform rect = _buttonToTapText.rectTransform;
+
+        rect.DOAnchorPosX(-500, 0.3f).SetEase(Ease.InBack)
+            .OnComplete(() =>
+            {
+                UpdateTapText();
+                rect.anchoredPosition = new Vector2(500, rect.anchoredPosition.y);
+                rect.DOAnchorPosX(0, 0.3f).SetEase(Ease.OutBack);
+            });
+    }
+    
+    private void UpdateTapText()
     {
         foreach (var button in _buttons)
         {
@@ -38,7 +51,7 @@ public class UIController : MonoBehaviour
             )
             .OnComplete((() =>
             {
-                UpdateTapText();
+                AnimateAndUpdateTapText();
             }));
     }
 
@@ -89,5 +102,12 @@ public class UIController : MonoBehaviour
         }
 
         return expression;
+    }
+
+    #endregion
+
+    public void ShowWinPanel(int starsCount)
+    {
+        
     }
 }

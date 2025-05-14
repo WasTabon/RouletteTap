@@ -1,15 +1,19 @@
 using System;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 
 public class NumberButton : MonoBehaviour
 {
-    public event Action OnClick;
+    public event Action OnGood;
     public event Action OnBad;
     
     [SerializeField] private int _id;
     [SerializeField] private TextMeshPro _text;
 
+    [SerializeField] private GameObject _correctParticle;
+    [SerializeField] private GameObject _incorrectParticle;
+    
     [SerializeField] private AudioClip _tapCorrectSound;
     [SerializeField] private AudioClip _tapIncorrectSound;
     
@@ -42,11 +46,15 @@ public class NumberButton : MonoBehaviour
             {
                 isClickable = false;
                 _audioSource.PlayOneShot(_tapCorrectSound);
-                OnClick?.Invoke();
+                GameObject particle = Instantiate(_correctParticle, transform.position, Quaternion.identity);
+                StartCoroutine(DeactivateAfterDelay(particle, 3f));
+                OnGood?.Invoke();
             }
             else
             {
                 _audioSource.PlayOneShot(_tapIncorrectSound);
+                GameObject particle = Instantiate(_incorrectParticle, transform.position, Quaternion.identity);
+                StartCoroutine(DeactivateAfterDelay(particle, 3f));
                 OnBad?.Invoke();
             }
         }
@@ -72,6 +80,29 @@ public class NumberButton : MonoBehaviour
         {
             CheckClick(Input.GetTouch(0).position);
         }
+    }
+    
+    private IEnumerator DeactivateAfterDelay(GameObject particle, float delay)
+    {
+        float timer = 0f;
+    
+        while (timer < delay)
+        {
+            if (particle == null) yield break;
+
+            particle.transform.position = transform.position;
+
+            timer += Time.deltaTime;
+            yield return null;
+        }
+
+        DeactivateParticle(particle);
+    }
+
+    private void DeactivateParticle(GameObject particle)
+    {
+        if (particle != null)
+            particle.SetActive(false);
     }
     
     private void OnValidate()

@@ -220,6 +220,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _id: 1
   _text: {fileID: 9099921855569191973}
+  _correctParticle: {fileID: 2020661361868494885, guid: 895c6d094b6b213418cddcfb520298e9, type: 3}
+  _incorrectParticle: {fileID: 4136945461712790902, guid: 30bef40a296670747ac7d6951220030f, type: 3}
   _tapCorrectSound: {fileID: 8300000, guid: 09b2afcb55685314ab4766195b9e80f8, type: 3}
   _tapIncorrectSound: {fileID: 8300000, guid: 53d2c1f442631e44d831c0e6d1119cd3, type: 3}
   _center: {fileID: 0}

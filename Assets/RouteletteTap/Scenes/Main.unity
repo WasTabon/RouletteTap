@@ -674,6 +674,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ca25a2770bca4e4490a9f92d572aa3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _tapsCount: 0
+  _taps3Stars: 0
+  _taps2Stars: 0
+  _taps1Star: 0
   _rouletteController: {fileID: 1351538885}
   _uiController: {fileID: 359851965}
 --- !u!4 &1010268296
