@@ -1,10 +1,12 @@
+using System;
 using System.Collections;
 using DG.Tweening;
-using Unity.Mathematics;
 using UnityEngine;
 
 public class RouletteController : MonoBehaviour
 {
+    public event Action OnStartSpin;
+    
     [SerializeField] private float _rotateSpeed;
     [SerializeField] private Transform[] _buttons;
 
@@ -56,6 +58,8 @@ public class RouletteController : MonoBehaviour
 
     public void StopSpin() => _isSpin = false;
 
+    public Transform[] GetButtons() => _buttons;
+    
     public void ChangeRotateSpeed(float speed)
     {
         _rotateDirection = new Vector3(0, 0, speed) * -1f;
@@ -96,7 +100,7 @@ public class RouletteController : MonoBehaviour
                 sequence.OnComplete(() =>
                 {
                     _audioSource.pitch = 1;
-                    StartSpin();
+                    OnStartSpin?.Invoke();
                 });
             });
     }

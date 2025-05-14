@@ -1,15 +1,27 @@
+using System;
 using TMPro;
 using UnityEngine;
 
 public class NumberButton : MonoBehaviour
 {
+    public event Action OnClick;
+    public event Action OnBad;
+    
     [SerializeField] private int _id;
     [SerializeField] private TextMeshPro _text;
+
+    [SerializeField] private AudioClip _tapCorrectSound;
+    [SerializeField] private AudioClip _tapIncorrectSound;
     
     [SerializeField] private Transform _center;
 
+    private AudioSource _audioSource;
+    
+    public bool isClickable;
+
     private void Start()
     {
+        _audioSource = GetComponent<AudioSource>();
         _text.text = _id.ToString();
         LookAt(_center);
     }
@@ -23,10 +35,20 @@ public class NumberButton : MonoBehaviour
     {
         Vector2 worldPos = Camera.main.ScreenToWorldPoint(screenPosition);
         RaycastHit2D hit = Physics2D.Raycast(worldPos, Vector2.zero);
-    
-        if (hit.collider != null)
+
+        if (hit.collider != null && hit.collider.gameObject == gameObject)
         {
-            Debug.Log("Clicked on 2D object: " + hit.collider.name);
+            if (isClickable)
+            {
+                isClickable = false;
+                _audioSource.PlayOneShot(_tapCorrectSound);
+                OnClick?.Invoke();
+            }
+            else
+            {
+                _audioSource.PlayOneShot(_tapIncorrectSound);
+                OnBad?.Invoke();
+            }
         }
     }
 
