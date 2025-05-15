@@ -101,24 +101,26 @@ public class GameController : MonoBehaviour
         Vector3 targetSize = new Vector3(0.03f, 0.03f, 0.03f);
         int neededButton = _uiController.currentNumber;
         int currentButton = neededButton + 1;
+        if (currentButton >= _uiController._buttons.Length)
+            currentButton = 1;
 
         Sequence sequence = DOTween.Sequence();
 
         for (int i = 1; i < _uiController._buttons.Length; i++)
         {
             int buttonIndex = currentButton;
-            
+
             sequence.AppendCallback(() =>
             {
                 _uiController._buttons[buttonIndex]._particle.gameObject.SetActive(true);
             });
-            
+
             sequence.Append(_uiController._buttons[buttonIndex]._particle
                 .DOPunchScale(Vector3.zero, 0f, 8, 0.8f));
-            
+
             sequence.Append(_uiController._buttons[buttonIndex]._particle
                 .DOPunchScale(targetSize, 0.05f, 8, 0.8f));
-            
+
             if (buttonIndex != neededButton)
             {
                 sequence.Append(_uiController._buttons[buttonIndex]._particle
@@ -129,7 +131,7 @@ public class GameController : MonoBehaviour
                     _uiController._buttons[buttonIndex]._particle.gameObject.SetActive(false);
                 });
             }
-            
+
             currentButton++;
             if (currentButton >= _uiController._buttons.Length)
                 currentButton = 1;
