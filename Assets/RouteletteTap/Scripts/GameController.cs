@@ -127,17 +127,18 @@ public class GameController : MonoBehaviour
                     _uiController._buttons[buttonIndex]._particle.gameObject.SetActive(false);
                 });
             }
-
-            sequence.OnComplete(() =>
-            {
-                _buttonWithParticle = _uiController._buttons[neededButton];
-                _isPowerupShowButton = false;
-            });
             
             currentButton++;
             if (currentButton >= _uiController._buttons.Length)
                 currentButton = 1;
         }
+        
+        sequence.OnComplete(() =>
+        {
+            _buttonWithParticle = _uiController._buttons[neededButton];
+            _isPowerupShowButton = false;
+            Debug.Log("OnComplete", _buttonWithParticle.gameObject);
+        });
     }
 
     private void AddTaps()
@@ -145,10 +146,10 @@ public class GameController : MonoBehaviour
         _currentGoodTaps++;
         if (_buttonWithParticle != null)
         {
-            _buttonWithParticle._particle.DOPunchScale(Vector3.zero, 0f, 8, 0.8f)
+            _buttonWithParticle._particle.DOPunchScale(Vector3.zero, 0.05f, 8, 0.8f)
                 .OnComplete((() =>
                 {
-                    _buttonWithParticle.gameObject.SetActive(false);
+                    _buttonWithParticle._particle.gameObject.SetActive(false);
                     _buttonWithParticle = null;
                 }));
         }
@@ -175,10 +176,10 @@ public class GameController : MonoBehaviour
         _currentBadTaps++;
         if (_buttonWithParticle != null)
         {
-            _buttonWithParticle._particle.DOPunchScale(Vector3.zero, 0f, 8, 0.8f)
+            _buttonWithParticle._particle.DOPunchScale(Vector3.zero, 0.05f, 8, 0.8f)
                 .OnComplete((() =>
                 {
-                    _buttonWithParticle.gameObject.SetActive(false);
+                    _buttonWithParticle._particle.gameObject.SetActive(false);
                     _buttonWithParticle = null;
                 }));
         }
