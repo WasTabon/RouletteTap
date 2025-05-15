@@ -1,4 +1,3 @@
-using System;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
@@ -9,6 +8,8 @@ public class UIController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _buttonToTapText;
     [SerializeField] private NumberButton[] _buttons;
     [SerializeField] private int _buttonsCount;
+
+    public bool _isAnim;
 
     private void Awake()
     {
@@ -22,11 +23,19 @@ public class UIController : MonoBehaviour
         RectTransform rect = _buttonToTapText.rectTransform;
 
         rect.DOAnchorPosX(-500, 0.3f).SetEase(Ease.InBack)
+            .OnStart((() =>
+            {
+                _isAnim = true;
+            }))
             .OnComplete(() =>
             {
                 UpdateTapText();
                 rect.anchoredPosition = new Vector2(500, rect.anchoredPosition.y);
-                rect.DOAnchorPosX(0, 0.3f).SetEase(Ease.OutBack);
+                rect.DOAnchorPosX(0, 0.3f).SetEase(Ease.OutBack)
+                    .OnComplete((() =>
+                    {
+                        _isAnim = false;
+                    }));
             });
     }
     
@@ -56,6 +65,10 @@ public class UIController : MonoBehaviour
                 snapping: false,
                 fadeOut: true
             )
+            .OnStart((() =>
+            {
+                _isAnim = true;
+            }))
             .OnComplete((() =>
             {
                 AnimateAndUpdateTapText();
@@ -112,9 +125,4 @@ public class UIController : MonoBehaviour
     }
 
     #endregion
-
-    public void ShowWinPanel(int starsCount)
-    {
-        
-    }
 }

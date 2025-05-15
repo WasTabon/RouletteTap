@@ -14,7 +14,7 @@ public class GameController : MonoBehaviour
     private int _currentGoodTaps;
     private int _currentBadTaps;
 
-    private bool _isWin;
+    private bool _isWin = true;
     private bool _clickProcessedThisFrame;
 
     private void Start()
@@ -33,7 +33,7 @@ public class GameController : MonoBehaviour
     
     private void Update()
     {
-        if (!_isWin)
+        if (!_isWin && !_uiController._isAnim)
         {
             _clickProcessedThisFrame = false;
 
@@ -71,6 +71,7 @@ public class GameController : MonoBehaviour
         _rouletteController.OnStartSpin -= StartGame;
         _rouletteController.StartSpin();
         _uiController.AnimateAndUpdateTapText();
+        _isWin = false;
     }
 
     private void AddTaps()
