@@ -32,7 +32,7 @@ public class NumberButton : MonoBehaviour
 
     private void Update()
     {
-        HandleTap();
+        //HandleTap();
     }
 
     private void CheckClick(Vector2 screenPosition)
@@ -57,6 +57,25 @@ public class NumberButton : MonoBehaviour
                 StartCoroutine(DeactivateAfterDelay(particle, 3f));
                 OnBad?.Invoke();
             }
+        }
+    }
+    
+    public void OnTap()
+    {
+        if (isClickable)
+        {
+            isClickable = false;
+            _audioSource.PlayOneShot(_tapCorrectSound);
+            GameObject particle = Instantiate(_correctParticle, transform.position, Quaternion.identity);
+            StartCoroutine(DeactivateAfterDelay(particle, 3f));
+            OnGood?.Invoke();
+        }
+        else
+        {
+            _audioSource.PlayOneShot(_tapIncorrectSound);
+            GameObject particle = Instantiate(_incorrectParticle, transform.position, Quaternion.identity);
+            StartCoroutine(DeactivateAfterDelay(particle, 3f));
+            OnBad?.Invoke();
         }
     }
 

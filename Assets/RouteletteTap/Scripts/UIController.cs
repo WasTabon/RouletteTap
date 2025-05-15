@@ -1,12 +1,19 @@
+using System;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class UIController : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _buttonToTapText;
     [SerializeField] private NumberButton[] _buttons;
     [SerializeField] private int _buttonsCount;
+
+    private void Awake()
+    {
+        _buttonToTapText.text = "";
+    }
 
     #region Taps
 
@@ -43,7 +50,7 @@ public class UIController : MonoBehaviour
 
         rectTransform.DOShakeAnchorPos(
                 duration: 0.5f,
-                strength: new Vector2(30f, 0f),
+                strength: new Vector2(50f, 0f),
                 vibrato: 50,
                 randomness: 90f,
                 snapping: false,
