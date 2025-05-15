@@ -95,6 +95,8 @@ public class GameController : MonoBehaviour
     
     public void HandlePowerupShowButton()
     {
+        if (_isPowerupShowButton) return;
+        
         _isPowerupShowButton = true;
         Vector3 targetSize = new Vector3(0.03f, 0.03f, 0.03f);
         int neededButton = _uiController.currentNumber;
@@ -137,7 +139,6 @@ public class GameController : MonoBehaviour
         {
             _buttonWithParticle = _uiController._buttons[neededButton];
             _isPowerupShowButton = false;
-            Debug.Log("OnComplete", _buttonWithParticle.gameObject);
         });
     }
 
