@@ -34,31 +34,6 @@ public class NumberButton : MonoBehaviour
     {
         //HandleTap();
     }
-
-    private void CheckClick(Vector2 screenPosition)
-    {
-        Vector2 worldPos = Camera.main.ScreenToWorldPoint(screenPosition);
-        RaycastHit2D hit = Physics2D.Raycast(worldPos, Vector2.zero);
-
-        if (hit.collider != null && hit.collider.gameObject == gameObject)
-        {
-            if (isClickable)
-            {
-                isClickable = false;
-                _audioSource.PlayOneShot(_tapCorrectSound);
-                GameObject particle = Instantiate(_correctParticle, transform.position, Quaternion.identity);
-                StartCoroutine(DeactivateAfterDelay(particle, 3f));
-                OnGood?.Invoke();
-            }
-            else
-            {
-                _audioSource.PlayOneShot(_tapIncorrectSound);
-                GameObject particle = Instantiate(_incorrectParticle, transform.position, Quaternion.identity);
-                StartCoroutine(DeactivateAfterDelay(particle, 3f));
-                OnBad?.Invoke();
-            }
-        }
-    }
     
     public void OnTap()
     {
@@ -86,19 +61,6 @@ public class NumberButton : MonoBehaviour
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
         transform.rotation = Quaternion.Euler(0, 0, angle);
-    }
-    
-    private void HandleTap()
-    {
-        if (Input.GetMouseButtonDown(0))
-        {
-            CheckClick(Input.mousePosition);
-        }
-
-        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
-        {
-            CheckClick(Input.GetTouch(0).position);
-        }
     }
     
     private IEnumerator DeactivateAfterDelay(GameObject particle, float delay)

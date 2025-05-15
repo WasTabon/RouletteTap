@@ -9,9 +9,12 @@ public class GameController : MonoBehaviour
     [SerializeField] private int _taps1Star;
     [SerializeField] private RouletteController _rouletteController;
     [SerializeField] private UIController _uiController;
+    [SerializeField] private WinPanelController _winPanelController;
 
-    private int _currentTaps;
-    
+    private int _currentGoodTaps;
+    private int _currentBadTaps;
+
+    private bool _isWin;
     private bool _clickProcessedThisFrame;
 
     private void Start()
@@ -22,6 +25,7 @@ public class GameController : MonoBehaviour
             button.GetComponent<NumberButton>().OnBad += _uiController.ShakeText;
             
             button.GetComponent<NumberButton>().OnGood += AddTaps;
+            button.GetComponent<NumberButton>().OnBad += AddBadTaps;
         }
 
         _rouletteController.OnStartSpin += StartGame;
@@ -29,18 +33,21 @@ public class GameController : MonoBehaviour
     
     private void Update()
     {
-        _clickProcessedThisFrame = false;
-
-        if (Input.GetMouseButtonDown(0) && !_clickProcessedThisFrame)
+        if (!_isWin)
         {
-            HandleClick(Input.mousePosition);
-            _clickProcessedThisFrame = true;
-        }
+            _clickProcessedThisFrame = false;
 
-        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began && !_clickProcessedThisFrame)
-        {
-            HandleClick(Input.GetTouch(0).position);
-            _clickProcessedThisFrame = true;
+            if (Input.GetMouseButtonDown(0) && !_clickProcessedThisFrame)
+            {
+                HandleClick(Input.mousePosition);
+                _clickProcessedThisFrame = true;
+            }
+
+            if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began && !_clickProcessedThisFrame)
+            {
+                HandleClick(Input.GetTouch(0).position);
+                _clickProcessedThisFrame = true;
+            }
         }
     }
 
@@ -57,10 +64,6 @@ public class GameController : MonoBehaviour
                 button.OnTap();
             }
         }
-        if (hit.collider == null)
-            Debug.Log("Missed: " + worldPos);
-        else
-            Debug.Log("Hit: " + hit.collider.name);
     }
     
     public void StartGame()
@@ -72,10 +75,31 @@ public class GameController : MonoBehaviour
 
     private void AddTaps()
     {
-        _currentTaps++;
-        if (_currentTaps >= _tapsCount)
+        _currentGoodTaps++;
+        if (_currentGoodTaps >= _tapsCount)
         {
-            
+            _isWin = true;
+            _rouletteController.StopSpin();
+            _winPanelController.ShowWinPanel(CalculateStars());   
         }
+    }
+
+    private void AddBadTaps()
+    {
+        _currentBadTaps++;
+    }
+    
+    private int CalculateStars()
+    {
+        if (_currentGoodTaps + _currentBadTaps <= _taps3Stars)
+            return 3;
+        if (_currentGoodTaps + _currentBadTaps <= _taps2Stars)
+            return 2;
+        if (_currentGoodTaps + _currentBadTaps <= _taps1Star)
+            return 1;
+        if (_currentGoodTaps + _currentBadTaps > _taps1Star)
+            return 1;
+    
+        return 1;
     }
 }
