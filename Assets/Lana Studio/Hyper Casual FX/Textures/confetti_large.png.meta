@@ -1,19 +1,19 @@
 fileFormatVersion: 2
-guid: b27bcf37600cca24196520251965a496
+guid: a5fd1d31c7504cd4083d950f36ed7511
 TextureImporter:
   internalIDToNameTable:
   - first:
       213: 21300000
-    second: Circle02_0
+    second: confetti_large_0
   - first:
       213: 21300002
-    second: Circle02_1
+    second: confetti_large_1
   - first:
       213: 21300004
-    second: Circle02_2
+    second: confetti_large_2
   - first:
       213: 21300006
-    second: Circle02_3
+    second: confetti_large_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -57,7 +57,7 @@ TextureImporter:
   compressionQuality: 50
   spriteMode: 2
   spriteExtrude: 1
-  spriteMeshType: 1
+  spriteMeshType: 0
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
@@ -122,7 +122,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Circle02_0
+      name: confetti_large_0
       rect:
         serializedVersion: 2
         x: 0
@@ -136,14 +136,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ace110a763af3264789bc8ecaa97d8ac
+      spriteID: f3def8eef2b3291419c2c8b50a79ad38
       internalID: 21300000
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Circle02_1
+      name: confetti_large_1
       rect:
         serializedVersion: 2
         x: 128
@@ -157,14 +157,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e906ebcdfa906c14aac788624f590297
+      spriteID: 5d0316f44527adf449110a5f1e294caa
       internalID: 21300002
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Circle02_2
+      name: confetti_large_2
       rect:
         serializedVersion: 2
         x: 0
@@ -178,14 +178,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7603d6c517373db4b8191aedc23305fd
+      spriteID: 8f9c3a58a9833ae4cb383db3197bfddd
       internalID: 21300004
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Circle02_3
+      name: confetti_large_3
       rect:
         serializedVersion: 2
         x: 128
@@ -199,7 +199,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 01f2253c6a4012e48b5762904ad12315
+      spriteID: fd8f9eac858377640abc9c26a677e308
       internalID: 21300006
       vertices: []
       indices: 
@@ -208,7 +208,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 3a38dff1a4966b3429be5e9ec09630be
+    spriteID: 19396ce76bc83c24a9ee7dbfb7491525
     internalID: 0
     vertices: []
     indices: 
@@ -216,10 +216,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Circle02_0: 21300000
-      Circle02_1: 21300002
-      Circle02_2: 21300004
-      Circle02_3: 21300006
+      confetti_large_0: 21300000
+      confetti_large_1: 21300002
+      confetti_large_2: 21300004
+      confetti_large_3: 21300006
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

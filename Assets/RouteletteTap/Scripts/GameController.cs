@@ -1,3 +1,4 @@
+using DG.Tweening;
 using UnityEngine;
 
 public class GameController : MonoBehaviour
@@ -10,15 +11,29 @@ public class GameController : MonoBehaviour
     [SerializeField] private RouletteController _rouletteController;
     [SerializeField] private UIController _uiController;
     [SerializeField] private WinPanelController _winPanelController;
+    [SerializeField] private SidePanelController _sidePanelController;
+    [SerializeField] private Transform _roulette;
 
+    private Vector3 _rouletteSize;
+
+    private NumberButton _buttonWithParticle;
+    
     private int _currentGoodTaps;
     private int _currentBadTaps;
 
     private bool _isWin = true;
     private bool _clickProcessedThisFrame;
+    private bool _isPowerupShowButton;
+    
+    private float punchScale = 0.35f;
+    private float duration = 0.3f;
+    private int vibrato = 10; 
+    private float elasticity = 0.8f;
 
     private void Start()
     {
+        _rouletteSize = _roulette.localScale;
+        
         foreach (Transform button in _rouletteController.GetButtons())
         {
             button.GetComponent<NumberButton>().OnGood += _uiController.AnimateAndUpdateTapText;
@@ -26,6 +41,9 @@ public class GameController : MonoBehaviour
             
             button.GetComponent<NumberButton>().OnGood += AddTaps;
             button.GetComponent<NumberButton>().OnBad += AddBadTaps;
+            
+            button.GetComponent<NumberButton>().OnGood += ShakeRoulette;
+            button.GetComponent<NumberButton>().OnBad += ShakeRoulette;
         }
 
         _rouletteController.OnStartSpin += StartGame;
@@ -33,7 +51,7 @@ public class GameController : MonoBehaviour
     
     private void Update()
     {
-        if (!_isWin && !_uiController._isAnim)
+        if (!_isWin && !_uiController._isAnim && !_isPowerupShowButton)
         {
             _clickProcessedThisFrame = false;
 
@@ -71,12 +89,69 @@ public class GameController : MonoBehaviour
         _rouletteController.OnStartSpin -= StartGame;
         _rouletteController.StartSpin();
         _uiController.AnimateAndUpdateTapText();
+        _sidePanelController.AnimateButtonAppearance();
         _isWin = false;
+    }
+    
+    public void HandlePowerupShowButton()
+    {
+        _isPowerupShowButton = true;
+        Vector3 targetSize = new Vector3(0.03f, 0.03f, 0.03f);
+        int neededButton = _uiController.currentNumber;
+        int currentButton = neededButton + 1;
+
+        Sequence sequence = DOTween.Sequence();
+
+        for (int i = 1; i < _uiController._buttons.Length; i++)
+        {
+            int buttonIndex = currentButton;
+            
+            sequence.AppendCallback(() =>
+            {
+                _uiController._buttons[buttonIndex]._particle.gameObject.SetActive(true);
+            });
+            
+            sequence.Append(_uiController._buttons[buttonIndex]._particle
+                .DOPunchScale(Vector3.zero, 0f, 8, 0.8f));
+            
+            sequence.Append(_uiController._buttons[buttonIndex]._particle
+                .DOPunchScale(targetSize, 0.05f, 8, 0.8f));
+            
+            if (buttonIndex != neededButton)
+            {
+                sequence.Append(_uiController._buttons[buttonIndex]._particle
+                    .DOPunchScale(Vector3.zero, 0.05f, 8, 0.8f));
+
+                sequence.AppendCallback(() =>
+                {
+                    _uiController._buttons[buttonIndex]._particle.gameObject.SetActive(false);
+                });
+            }
+
+            sequence.OnComplete(() =>
+            {
+                _buttonWithParticle = _uiController._buttons[neededButton];
+                _isPowerupShowButton = false;
+            });
+            
+            currentButton++;
+            if (currentButton >= _uiController._buttons.Length)
+                currentButton = 1;
+        }
     }
 
     private void AddTaps()
     {
         _currentGoodTaps++;
+        if (_buttonWithParticle != null)
+        {
+            _buttonWithParticle._particle.DOPunchScale(Vector3.zero, 0f, 8, 0.8f)
+                .OnComplete((() =>
+                {
+                    _buttonWithParticle.gameObject.SetActive(false);
+                    _buttonWithParticle = null;
+                }));
+        }
         if (_currentGoodTaps >= _tapsCount)
         {
             _isWin = true;
@@ -85,9 +160,28 @@ public class GameController : MonoBehaviour
         }
     }
 
+    private void ShakeRoulette()
+    {
+        _roulette.DOKill();
+
+        _roulette.localScale = _rouletteSize;
+
+        _roulette.DOPunchScale(_rouletteSize * punchScale, duration, vibrato, elasticity)
+            .SetEase(Ease.OutBack);
+    }
+    
     private void AddBadTaps()
     {
         _currentBadTaps++;
+        if (_buttonWithParticle != null)
+        {
+            _buttonWithParticle._particle.DOPunchScale(Vector3.zero, 0f, 8, 0.8f)
+                .OnComplete((() =>
+                {
+                    _buttonWithParticle.gameObject.SetActive(false);
+                    _buttonWithParticle = null;
+                }));
+        }
     }
     
     private int CalculateStars()

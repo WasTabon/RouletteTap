@@ -1,19 +1,19 @@
 fileFormatVersion: 2
-guid: b27bcf37600cca24196520251965a496
+guid: 7f221a2efb03036429b23e6e78fe52d5
 TextureImporter:
   internalIDToNameTable:
   - first:
       213: 21300000
-    second: Circle02_0
+    second: Dust01_0
   - first:
       213: 21300002
-    second: Circle02_1
+    second: Dust01_1
   - first:
       213: 21300004
-    second: Circle02_2
+    second: Dust01_2
   - first:
       213: 21300006
-    second: Circle02_3
+    second: Dust01_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -81,10 +81,10 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 256
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 3
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -94,10 +94,10 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 1
   - serializedVersion: 3
     buildTarget: Standalone
-    maxTextureSize: 2048
+    maxTextureSize: 256
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 3
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -107,10 +107,10 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 1
   - serializedVersion: 3
     buildTarget: Android
-    maxTextureSize: 2048
+    maxTextureSize: 256
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 3
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -122,7 +122,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Circle02_0
+      name: Dust01_0
       rect:
         serializedVersion: 2
         x: 0
@@ -136,14 +136,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ace110a763af3264789bc8ecaa97d8ac
+      spriteID: 759881a1cf68fd4468aa01f621db9d1a
       internalID: 21300000
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Circle02_1
+      name: Dust01_1
       rect:
         serializedVersion: 2
         x: 128
@@ -157,14 +157,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e906ebcdfa906c14aac788624f590297
+      spriteID: e029155590e95f64d8df61492e1a7cc5
       internalID: 21300002
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Circle02_2
+      name: Dust01_2
       rect:
         serializedVersion: 2
         x: 0
@@ -178,14 +178,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7603d6c517373db4b8191aedc23305fd
+      spriteID: f27906647adf1564db5e4e130263dddf
       internalID: 21300004
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Circle02_3
+      name: Dust01_3
       rect:
         serializedVersion: 2
         x: 128
@@ -199,7 +199,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 01f2253c6a4012e48b5762904ad12315
+      spriteID: 0439e6c61fdaf9244903c2c3d564e561
       internalID: 21300006
       vertices: []
       indices: 
@@ -208,7 +208,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 3a38dff1a4966b3429be5e9ec09630be
+    spriteID: 5e963800933c9324c83334ebdec57ee9
     internalID: 0
     vertices: []
     indices: 
@@ -216,10 +216,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Circle02_0: 21300000
-      Circle02_1: 21300002
-      Circle02_2: 21300004
-      Circle02_3: 21300006
+      Dust01_0: 21300000
+      Dust01_1: 21300002
+      Dust01_2: 21300004
+      Dust01_3: 21300006
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

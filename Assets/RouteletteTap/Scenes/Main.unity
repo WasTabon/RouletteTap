@@ -548,6 +548,7 @@ MonoBehaviour:
   - {fileID: 1601568725}
   - {fileID: 1787023639}
   _buttonsCount: 12
+  currentNumber: 0
   _isAnim: 0
 --- !u!4 &359851966
 Transform:
@@ -1317,9 +1318,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.6094075, y: 0}
   m_AnchorMax: {x: 0.7778519, y: 1}
-  m_AnchoredPosition: {x: -5, y: -2.3399963}
+  m_AnchoredPosition: {x: -0.9781494, y: -2.3399658}
   m_SizeDelta: {x: -8.043579, y: 4.6799927}
-  m_Pivot: {x: 1, y: 0.5}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &966150666
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1566,13 +1567,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _mainCamera: {fileID: 324419181}
-  _tapsCount: 1
-  _taps3Stars: 1
-  _taps2Stars: 3
-  _taps1Star: 5
+  _tapsCount: 30
+  _taps3Stars: 30
+  _taps2Stars: 40
+  _taps1Star: 50
   _rouletteController: {fileID: 1351538885}
   _uiController: {fileID: 359851965}
   _winPanelController: {fileID: 2069391290}
+  _sidePanelController: {fileID: 1694993637}
+  _roulette: {fileID: 1351538882}
 --- !u!4 &1010268296
 Transform:
   m_ObjectHideFlags: 0
@@ -1624,9 +1627,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.83970374, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -0.47827148, y: 0}
   m_SizeDelta: {x: 0.9564209, y: 4.6799927}
-  m_Pivot: {x: 1, y: 0.5}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1010438351
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1745,9 +1748,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.372, y: 0}
   m_AnchorMax: {x: 0.537, y: 1}
-  m_AnchoredPosition: {x: -1, y: -2.3399963}
+  m_AnchoredPosition: {x: 1.0217896, y: -2.3399658}
   m_SizeDelta: {x: -4.043579, y: 4.6799927}
-  m_Pivot: {x: 1, y: 0.5}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1106644909
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1791,7 +1794,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1106644910}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1010268295}
+        m_TargetAssemblyTypeName: GameController, Assembly-CSharp
+        m_MethodName: HandlePowerupShowButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1106644910
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2291,6 +2306,50 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9825cf976a53787469699690ad45e206, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1269240492
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1269240494}
+  - component: {fileID: 1269240493}
+  m_Layer: 0
+  m_Name: PowerupManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1269240493
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1269240492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9053c6c2c54a014f8f16b8e1ba0b3de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1269240494
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1269240492}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.0049937, y: 0.6628191, z: -0.022310335}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1351538880
 GameObject:
   m_ObjectHideFlags: 0
@@ -2421,7 +2480,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8965e9dc56e00a4c99c41dad3392487, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rotateSpeed: 60
+  _rotateSpeed: 80
   _buttons:
   - {fileID: 1545930790}
   - {fileID: 1181380618}
@@ -2886,7 +2945,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Button
+  m_text: Powerup
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3474,9 +3533,9 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2003034827}
-  - {fileID: 1581520909}
   - {fileID: 1744635932}
   - {fileID: 1639842528}
+  - {fileID: 1581520909}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -4183,3 +4242,4 @@ SceneRoots:
   - {fileID: 2069391291}
   - {fileID: 1694993638}
   - {fileID: 89250680}
+  - {fileID: 1269240494}

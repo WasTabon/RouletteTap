@@ -6,9 +6,11 @@ using Random = UnityEngine.Random;
 public class UIController : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _buttonToTapText;
-    [SerializeField] private NumberButton[] _buttons;
+    [SerializeField] public NumberButton[] _buttons;
     [SerializeField] private int _buttonsCount;
 
+    public int currentNumber;
+    
     public bool _isAnim;
 
     private void Awake()
@@ -48,6 +50,7 @@ public class UIController : MonoBehaviour
         }
         
         int result = Random.Range(1, _buttonsCount + 1);
+        currentNumber = result;
         string displayText = GenerateExpression(result);
         _buttonToTapText.text = displayText;
         _buttons[result].isClickable = true;

@@ -11,6 +11,8 @@ public class NumberButton : MonoBehaviour
     [SerializeField] private int _id;
     [SerializeField] private TextMeshPro _text;
 
+    [SerializeField] public Transform _particle;
+    
     [SerializeField] private GameObject _correctParticle;
     [SerializeField] private GameObject _incorrectParticle;
     
@@ -27,6 +29,7 @@ public class NumberButton : MonoBehaviour
     {
         _audioSource = GetComponent<AudioSource>();
         _text.text = _id.ToString();
+        _particle.gameObject.SetActive(false);
         LookAt(_center);
     }
 
