@@ -173,7 +173,7 @@ public class GameController : MonoBehaviour
 
     public void HandlePowerupChangeNumber()
     {
-        
+        _uiController.AnimateAndUpdateTapText();
     }
 
     private void AddTaps()
