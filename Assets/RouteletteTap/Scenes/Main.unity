@@ -622,7 +622,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Button
+  m_text: Slow
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1318,7 +1318,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.6094075, y: 0}
   m_AnchorMax: {x: 0.7778519, y: 1}
-  m_AnchoredPosition: {x: -0.9781494, y: -2.3399658}
+  m_AnchoredPosition: {x: -0.97802734, y: -2.3399658}
   m_SizeDelta: {x: -8.043579, y: 4.6799927}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &966150666
@@ -1364,7 +1364,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 966150667}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1010268295}
+        m_TargetAssemblyTypeName: GameController, Assembly-CSharp
+        m_MethodName: HandlePowerupSlowRoulette
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &966150667
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1437,7 +1449,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.15277779, y: 0.8074643}
   m_AnchorMax: {x: 0.8441112, y: 0.93057734}
-  m_AnchoredPosition: {x: 1.4999695, y: -1.5}
+  m_AnchoredPosition: {x: 1.5, y: -1.5}
   m_SizeDelta: {x: -18.492615, y: -17.565796}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &975037437
@@ -1748,7 +1760,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.372, y: 0}
   m_AnchorMax: {x: 0.537, y: 1}
-  m_AnchoredPosition: {x: 1.0217896, y: -2.3399658}
+  m_AnchoredPosition: {x: 1.0217285, y: -2.3399658}
   m_SizeDelta: {x: -4.043579, y: 4.6799927}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1106644909
@@ -2803,7 +2815,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.31100002, y: 0.13976786}
   m_AnchorMax: {x: 0.69070375, y: 0.272}
-  m_AnchoredPosition: {x: -1, y: -4.499939}
+  m_AnchoredPosition: {x: -1, y: -4.5}
   m_SizeDelta: {x: -7.8904114, y: -8.229919}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1420413454

@@ -7,7 +7,7 @@ public class RouletteController : MonoBehaviour
 {
     public event Action OnStartSpin;
     
-    [SerializeField] private float _rotateSpeed;
+    [SerializeField] public float _rotateSpeed;
     [SerializeField] private Transform[] _buttons;
 
     [SerializeField] private float _wheelAnimationSpeed;
@@ -48,8 +48,10 @@ public class RouletteController : MonoBehaviour
 
     private void Update()
     {
+        _rotateDirection = new Vector3(0, 0, _rotateSpeed) * -1f;
         if (_isSpin)
         {
+               
             HandleRotate();
         }
     }

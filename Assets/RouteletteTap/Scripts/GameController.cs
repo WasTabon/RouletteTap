@@ -24,6 +24,7 @@ public class GameController : MonoBehaviour
     private bool _isWin = true;
     private bool _clickProcessedThisFrame;
     private bool _isPowerupShowButton;
+    private bool _isPowerupSlowRoulette;
     
     private float punchScale = 0.35f;
     private float duration = 0.3f;
@@ -142,6 +143,37 @@ public class GameController : MonoBehaviour
             _buttonWithParticle = _uiController._buttons[neededButton];
             _isPowerupShowButton = false;
         });
+    }
+
+    public void HandlePowerupSlowRoulette()
+    {
+        if (!_isPowerupSlowRoulette)
+        {
+            _isPowerupSlowRoulette = true;
+            float currentSpeed = _rouletteController._rotateSpeed;
+            float slowSpeed = currentSpeed / 2.5f;
+            _rouletteController._rotateSpeed = slowSpeed;
+
+            DOTween.To(() => _rouletteController._rotateSpeed, x => _rouletteController._rotateSpeed = x, slowSpeed, 3f).SetEase(Ease.InOutBounce)
+                .OnComplete((() =>
+                {
+                    DOTween.To(() => _rouletteController._rotateSpeed, x => _rouletteController._rotateSpeed = x,
+                            currentSpeed, 15f)
+                        .OnStart((() =>
+                        {
+
+                        }))
+                        .OnComplete((() =>
+                        {
+                            _isPowerupSlowRoulette = false;
+                        }));
+                }));
+        }
+    }
+
+    public void HandlePowerupChangeNumber()
+    {
+        
     }
 
     private void AddTaps()
