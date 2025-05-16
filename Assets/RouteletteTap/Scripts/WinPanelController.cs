@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class WinPanelController : MonoBehaviour
 {
+    [SerializeField] private int _levelID;
+    
     [Header("UI References")]
     [SerializeField] private CanvasGroup _blackBackground;
     [SerializeField] private RectTransform _winPanel;
@@ -28,6 +30,8 @@ public class WinPanelController : MonoBehaviour
     private Vector3 _winPanelSize;
     private List<Vector3> _transformSizes;
     private Button _continueBtn;
+
+    private int _starsCount;
 
     private void Start()
     {
@@ -53,7 +57,7 @@ public class WinPanelController : MonoBehaviour
 
     public void ShowWinPanel(int starsCount)
     {
-        Debug.Log($"Stars: {starsCount}");
+        _starsCount = starsCount;
 
         _blackBackground.gameObject.SetActive(true);
         _winPanel.gameObject.SetActive(true);
@@ -124,5 +128,11 @@ public class WinPanelController : MonoBehaviour
 
         if (_continueBtn != null)
             sequence.AppendCallback(() => _continueBtn.interactable = true);
+    }
+
+    public void LoadLevels()
+    {
+        PlayerPrefs.SetInt("level", _levelID);
+        PlayerPrefs.SetInt("stars", _starsCount);
     }
 }
