@@ -119,9 +119,9 @@ public class RouletteController : MonoBehaviour
 
     public void TempSpeedBoost(float amount, float duration)
     {
-        int random = Random.Range(0, 100);
-        if (random <= 50)
-            amount *= -1;
+        //int random = Random.Range(0, 100);
+        //if (random <= 35)
+            //amount *= -1;
         
         float originalSpeed = _rotateSpeed;
         _rotateSpeed += amount;
@@ -130,6 +130,12 @@ public class RouletteController : MonoBehaviour
         {
             _rotateSpeed = originalSpeed;
         });
+    }
+    
+    public void ReverseRotation(float duration)
+    {
+        _rotateSpeed *= -1;
+        DOVirtual.DelayedCall(duration, () => _rotateSpeed *= -1);
     }
     
     private IEnumerator DeactivateAfterDelay(GameObject particle, float delay)

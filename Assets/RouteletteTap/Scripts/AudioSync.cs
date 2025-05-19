@@ -26,12 +26,20 @@ public class AudioSync : MonoBehaviour
     [SerializeField] private int speedFrequencyRangeEnd = 30;
     [SerializeField] private float speedSensitivity = 20f;
     [SerializeField] private float speedCooldown = 0.3f;
+    
+    [Header("Reverse Spin Settings (High Frequencies)")]
+    [SerializeField] private int reverseFrequencyStart = 40;
+    [SerializeField] private int reverseFrequencyEnd = 63;
+    [SerializeField] private float reverseSensitivity = 15f;
+    [SerializeField] private float reverseThreshold = 1f;
+    [SerializeField] private float reverseCooldown = 0.8f;
 
     private bool _isStart;
     
     private float[] _spectrum;
     private float _punchTimer = 0f;
     private float _speedTimer = 0f;
+    private float _reverseTimer = 0f;
 
     private void Start()
     {
@@ -47,8 +55,11 @@ public class AudioSync : MonoBehaviour
 
         _punchTimer += Time.deltaTime;
         _speedTimer += Time.deltaTime;
+        _reverseTimer += Time.deltaTime;
 
         _audioSource.GetSpectrumData(_spectrum, 0, fftWindow);
+
+        float reverseAmp = GetAmplitude(reverseFrequencyStart, reverseFrequencyEnd) * reverseSensitivity;
 
         float punchAmp = GetAmplitude(punchFrequencyRangeStart, punchFrequencyRangeEnd) * punchSensitivity;
         float speedAmp = GetAmplitude(speedFrequencyRangeStart, speedFrequencyRangeEnd) * speedSensitivity;
@@ -63,6 +74,12 @@ public class AudioSync : MonoBehaviour
         {
             _rouletteController.TempSpeedBoost(speedBoostAmount, speedBoostDuration);
             _speedTimer = 0f;
+        }
+        
+        if (reverseAmp > reverseThreshold && _reverseTimer >= reverseCooldown)
+        {
+            _rouletteController.ReverseRotation(0.5f);
+            _reverseTimer = 0f;
         }
     }
 
