@@ -27,6 +27,8 @@ public class AudioReactivePulse : MonoBehaviour
             return;
         if (audioSync == null)
             return;
+        if (!audioSync.gameObject.activeSelf)
+            return;
 
         float amplitude = audioSync.GetAmplitude(frequencyRangeStart, frequencyRangeEnd) * sensitivity;
 

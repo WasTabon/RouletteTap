@@ -1,3 +1,4 @@
+using System;
 using DG.Tweening;
 using UnityEngine;
 
@@ -34,8 +35,6 @@ public class GameController : MonoBehaviour
 
     private void Start()
     {
-        _rouletteSize = _roulette.localScale;
-        
         foreach (Transform button in _rouletteController.GetButtons())
         {
             button.GetComponent<NumberButton>().OnGood += _uiController.AnimateAndUpdateTapText;
@@ -89,6 +88,7 @@ public class GameController : MonoBehaviour
     public void StartGame()
     {
         _rouletteController.OnStartSpin -= StartGame;
+        _rouletteSize = _roulette.localScale;
         _rouletteController.StartSpin();
         _uiController.AnimateAndUpdateTapText();
         _uiController.AnimateButtonAppearance();
@@ -204,7 +204,7 @@ public class GameController : MonoBehaviour
         _roulette.DOKill();
 
         _roulette.localScale = _rouletteSize;
-
+        
         _roulette.DOPunchScale(_rouletteSize * punchScale, duration, vibrato, elasticity)
             .SetEase(Ease.OutBack);
     }

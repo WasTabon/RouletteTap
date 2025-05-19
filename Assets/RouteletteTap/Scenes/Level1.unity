@@ -850,6 +850,10 @@ PrefabInstance:
       propertyPath: _panelButtons.Array.data[3]
       value: 
       objectReference: {fileID: 1804292419}
+    - target: {fileID: 5787218746239132901, guid: 703cf34457d256942990fd48feb678ab, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6203789969763823740, guid: 703cf34457d256942990fd48feb678ab, type: 3}
       propertyPath: _roulette
       value: 
