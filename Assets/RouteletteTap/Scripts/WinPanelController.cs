@@ -28,6 +28,8 @@ public class WinPanelController : MonoBehaviour
     [Header("Particles")]
     [SerializeField] private GameObject _starParticlePrefab;
 
+    [SerializeField] private AudioLowPassFilter _audioLowPassFilter;
+
     private Vector3 _winPanelSize;
     private List<Vector3> _transformSizes;
     private Button _continueBtn;
@@ -60,6 +62,8 @@ public class WinPanelController : MonoBehaviour
     {
         _starsCount = starsCount;
 
+        _audioLowPassFilter.cutoffFrequency = 500f;
+        
         _blackBackground.gameObject.SetActive(true);
         _winPanel.gameObject.SetActive(true);
         _blackBackground.alpha = 0f;
