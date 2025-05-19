@@ -15,7 +15,9 @@ public class NumberButton : MonoBehaviour
     
     [SerializeField] private GameObject _correctParticle;
     [SerializeField] private GameObject _incorrectParticle;
-    
+
+    [SerializeField] private float _correctTapVolume;
+    [SerializeField] private float _incorrectTapVolume;
     [SerializeField] private AudioClip _tapCorrectSound;
     [SerializeField] private AudioClip _tapIncorrectSound;
     
@@ -43,14 +45,14 @@ public class NumberButton : MonoBehaviour
         if (isClickable)
         {
             isClickable = false;
-            _audioSource.PlayOneShot(_tapCorrectSound);
+            _audioSource.PlayOneShot(_tapCorrectSound, _correctTapVolume);
             GameObject particle = Instantiate(_correctParticle, transform.position, Quaternion.identity);
             StartCoroutine(DeactivateAfterDelay(particle, 3f));
             OnGood?.Invoke();
         }
         else
         {
-            _audioSource.PlayOneShot(_tapIncorrectSound);
+            _audioSource.PlayOneShot(_tapIncorrectSound, _incorrectTapVolume);
             GameObject particle = Instantiate(_incorrectParticle, transform.position, Quaternion.identity);
             StartCoroutine(DeactivateAfterDelay(particle, 3f));
             OnBad?.Invoke();

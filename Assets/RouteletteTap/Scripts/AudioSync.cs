@@ -34,7 +34,7 @@ public class AudioSync : MonoBehaviour
     [SerializeField] private float reverseThreshold = 1f;
     [SerializeField] private float reverseCooldown = 0.8f;
 
-    private bool _isStart;
+    public bool _isStart;
     
     private float[] _spectrum;
     private float _punchTimer = 0f;
@@ -83,7 +83,7 @@ public class AudioSync : MonoBehaviour
         }
     }
 
-    private float GetAmplitude(int start, int end)
+    public float GetAmplitude(int start, int end)
     {
         float sum = 0f;
         for (int i = start; i <= end && i < _spectrum.Length; i++)

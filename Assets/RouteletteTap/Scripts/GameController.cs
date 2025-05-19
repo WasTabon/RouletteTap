@@ -91,6 +91,7 @@ public class GameController : MonoBehaviour
         _rouletteController.OnStartSpin -= StartGame;
         _rouletteController.StartSpin();
         _uiController.AnimateAndUpdateTapText();
+        _uiController.AnimateButtonAppearance();
         _sidePanelController.AnimateButtonAppearance();
         _audioSync.Initialize();
         _isWin = false;

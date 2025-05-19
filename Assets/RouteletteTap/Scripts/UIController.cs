@@ -6,10 +6,14 @@ using Random = UnityEngine.Random;
 
 public class UIController : MonoBehaviour
 {
+    [SerializeField] private GameObject _menuButton;
     [SerializeField] private TextMeshProUGUI _buttonToTapText;
     [SerializeField] public NumberButton[] _buttons;
     [SerializeField] private int _buttonsCount;
 
+    [SerializeField] private AudioSource _audioSource;
+    [SerializeField] private AudioClip _clip;
+    
     public int currentNumber;
     
     public bool _isAnim;
@@ -17,8 +21,29 @@ public class UIController : MonoBehaviour
     private void Awake()
     {
         _buttonToTapText.text = "";
+        
+        RectTransform openButtonRect = _menuButton.GetComponent<RectTransform>();
+        openButtonRect.localScale = Vector3.zero;
     }
 
+    public void AnimateButtonAppearance()
+    {
+        RectTransform openButtonRect = _menuButton.GetComponent<RectTransform>();
+        openButtonRect.localScale = Vector3.zero;
+        openButtonRect.localRotation = Quaternion.Euler(0, 0, 30f);
+
+        Sequence seq = DOTween.Sequence();
+
+        seq.Append(openButtonRect.DOScale(1.1f, 0.6f).SetEase(Ease.OutElastic));
+        seq.Join(openButtonRect.DORotate(Vector3.zero, 0.6f).SetEase(Ease.OutBack));
+
+        seq.Append(openButtonRect.DOScale(1f, 0.3f).SetEase(Ease.InOutSine));
+        seq.AppendInterval(0.2f);
+        
+        if (_audioSource && _clip)
+            _audioSource.PlayOneShot(_clip);
+    }
+    
     #region Taps
 
     public void AnimateAndUpdateTapText()

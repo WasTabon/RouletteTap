@@ -224,8 +224,10 @@ MonoBehaviour:
   _particle: {fileID: 6442409272696503078}
   _correctParticle: {fileID: 2020661361868494885, guid: 895c6d094b6b213418cddcfb520298e9, type: 3}
   _incorrectParticle: {fileID: 4136945461712790902, guid: 30bef40a296670747ac7d6951220030f, type: 3}
-  _tapCorrectSound: {fileID: 8300000, guid: 09b2afcb55685314ab4766195b9e80f8, type: 3}
-  _tapIncorrectSound: {fileID: 8300000, guid: 53d2c1f442631e44d831c0e6d1119cd3, type: 3}
+  _correctTapVolume: 1
+  _incorrectTapVolume: 0.5
+  _tapCorrectSound: {fileID: 8300000, guid: 05cfc2f2e1184024eb2c159d9863373f, type: 3}
+  _tapIncorrectSound: {fileID: 8300000, guid: 45e5f72a8534c5244ad2c384d4872ded, type: 3}
   _center: {fileID: 0}
   isClickable: 0
 --- !u!61 &9040117229718030542
@@ -285,7 +287,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.7
   m_Pitch: 1
   Loop: 0
   Mute: 0
