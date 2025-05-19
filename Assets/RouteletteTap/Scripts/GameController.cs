@@ -12,6 +12,7 @@ public class GameController : MonoBehaviour
     [SerializeField] private UIController _uiController;
     [SerializeField] private WinPanelController _winPanelController;
     [SerializeField] private SidePanelController _sidePanelController;
+    [SerializeField] private AudioSync _audioSync;
     [SerializeField] private Transform _roulette;
 
     private Vector3 _rouletteSize;
@@ -91,6 +92,7 @@ public class GameController : MonoBehaviour
         _rouletteController.StartSpin();
         _uiController.AnimateAndUpdateTapText();
         _sidePanelController.AnimateButtonAppearance();
+        _audioSync.Initialize();
         _isWin = false;
     }
     
@@ -221,6 +223,26 @@ public class GameController : MonoBehaviour
     }
     
     private int CalculateStars()
+    {
+        if (PlayerPrefs.HasKey($"level_stars_{_winPanelController._levelID}"))
+        {
+            int stars = PlayerPrefs.GetInt($"level_stars_{_winPanelController._levelID}");
+            if (stars > CalculateStarsToGet())
+                    return stars;
+        }
+        if (_currentGoodTaps + _currentBadTaps <= _taps3Stars)
+            return 3;
+        if (_currentGoodTaps + _currentBadTaps <= _taps2Stars)
+            return 2;
+        if (_currentGoodTaps + _currentBadTaps <= _taps1Star)
+            return 1;
+        if (_currentGoodTaps + _currentBadTaps > _taps1Star)
+            return 1;
+    
+        return 1;
+    }
+
+    private int CalculateStarsToGet()
     {
         if (_currentGoodTaps + _currentBadTaps <= _taps3Stars)
             return 3;

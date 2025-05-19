@@ -2,11 +2,12 @@ using System.Collections.Generic;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class WinPanelController : MonoBehaviour
 {
-    [SerializeField] private int _levelID;
+    [SerializeField] public int _levelID;
     
     [Header("UI References")]
     [SerializeField] private CanvasGroup _blackBackground;
@@ -134,5 +135,6 @@ public class WinPanelController : MonoBehaviour
     {
         PlayerPrefs.SetInt("level", _levelID);
         PlayerPrefs.SetInt("stars", _starsCount);
+        SceneManager.LoadScene("Levels");
     }
 }

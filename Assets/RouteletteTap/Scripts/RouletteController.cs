@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using DG.Tweening;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class RouletteController : MonoBehaviour
 {
@@ -107,6 +108,30 @@ public class RouletteController : MonoBehaviour
             });
     }
 
+    public bool IsSpinning() => _isSpin;
+
+    public void PunchEffect(Vector3 punchStrength, float duration)
+    {
+        transform.DOKill();
+        transform.localScale = _wheelSize;
+        transform.DOPunchScale(punchStrength, duration, 10, 1);
+    }
+
+    public void TempSpeedBoost(float amount, float duration)
+    {
+        int random = Random.Range(0, 100);
+        if (random <= 50)
+            amount *= -1;
+        
+        float originalSpeed = _rotateSpeed;
+        _rotateSpeed += amount;
+
+        DOVirtual.DelayedCall(duration, () =>
+        {
+            _rotateSpeed = originalSpeed;
+        });
+    }
+    
     private IEnumerator DeactivateAfterDelay(GameObject particle, float delay)
     {
         yield return new WaitForSeconds(delay);

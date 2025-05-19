@@ -1,6 +1,7 @@
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 
 public class UIController : MonoBehaviour
@@ -128,4 +129,9 @@ public class UIController : MonoBehaviour
     }
 
     #endregion
+
+    public void LoadMenu()
+    {
+        SceneManager.LoadScene("Levels");
+    }
 }
