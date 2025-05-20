@@ -155,22 +155,26 @@ public class GameController : MonoBehaviour
             _isPowerupSlowRoulette = true;
             float currentSpeed = _rouletteController._rotateSpeed;
             float slowSpeed = currentSpeed / 2.5f;
+            
+            float currentPitch = _audioSync._audioSource.pitch;
+            float slowPitch = 0.5f;
+            
             _rouletteController._rotateSpeed = slowSpeed;
 
-            DOTween.To(() => _rouletteController._rotateSpeed, x => _rouletteController._rotateSpeed = x, slowSpeed, 3f).SetEase(Ease.InOutBounce)
-                .OnComplete((() =>
-                {
-                    DOTween.To(() => _rouletteController._rotateSpeed, x => _rouletteController._rotateSpeed = x,
-                            currentSpeed, 15f)
-                        .OnStart((() =>
-                        {
+            DOTween.To(() => _rouletteController._rotateSpeed, x => _rouletteController._rotateSpeed = x, slowSpeed, 3f)
+                .SetEase(Ease.InOutBounce);
 
-                        }))
-                        .OnComplete((() =>
+            DOTween.To(() => _audioSync._audioSource.pitch, x => _audioSync._audioSource.pitch = x, slowPitch, 3f)
+                .SetEase(Ease.InOutBounce)
+                .OnComplete(() =>
+                {
+                    DOTween.To(() => _rouletteController._rotateSpeed, x => _rouletteController._rotateSpeed = x, currentSpeed, 15f);
+                    DOTween.To(() => _audioSync._audioSource.pitch, x => _audioSync._audioSource.pitch = x, currentPitch, 15f)
+                        .OnComplete(() =>
                         {
                             _isPowerupSlowRoulette = false;
-                        }));
-                }));
+                        });
+                });
         }
     }
 

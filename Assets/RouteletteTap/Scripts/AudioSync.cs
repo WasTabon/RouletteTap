@@ -3,7 +3,7 @@ using UnityEngine;
 public class AudioSync : MonoBehaviour
 {
     [Header("References")]
-    [SerializeField] private AudioSource _audioSource;
+    [SerializeField] public AudioSource _audioSource;
     [SerializeField] private AudioClip _music;
     [SerializeField] private RouletteController _rouletteController;
 
