@@ -8,12 +8,19 @@ public class LevelsStarsManager : MonoBehaviour
 {
     [SerializeField] private RectTransform[] _levels;
     [SerializeField] private RectTransform[] _levelPath;
+    [SerializeField] private AudioClip[] _starAppearSounds;
+    [SerializeField] private AudioClip[] _pathAppearSounds;
+    [SerializeField] private AudioClip _lockAppearSound;
 
+    private AudioSource _audioSource;
+    
     private int _level;
     private int _stars;
 
     private void Start()
     {
+        _audioSource = GetComponent<AudioSource>();
+        
         LoadLevels();
 
         if (PlayerPrefs.HasKey("level"))
@@ -92,7 +99,12 @@ public class LevelsStarsManager : MonoBehaviour
         RectTransform currentLevel = _levels[_level];
         List<RectTransform> currentStars = GetTaggedChildren(currentLevel, "Star");
 
-        AnimateElements(currentStars, currentStars[0].localScale);
+        if (currentStars.Count > _stars)
+        {
+            currentStars = currentStars.GetRange(0, _stars);
+        }
+        
+        AnimateElements(currentStars, currentStars[0].localScale, 0.5f, true);
 
         if (PlayerPrefs.HasKey($"level_stars_{_level}")) 
             return;
@@ -119,7 +131,7 @@ public class LevelsStarsManager : MonoBehaviour
         PlayerPrefs.Save();
     }
 
-    private void AnimateElements(List<RectTransform> elements, Vector3 targetScale, float duration = 0.5f)
+    private void AnimateElements(List<RectTransform> elements, Vector3 targetScale, float duration = 0.5f, bool isStar = false)
     {
         Sequence sequence = DOTween.Sequence();
 
@@ -131,7 +143,19 @@ public class LevelsStarsManager : MonoBehaviour
             if (img != null)
                 img.DOFade(1f, 0f);
 
-            sequence.Append(el.DOScale(targetScale, duration).SetEase(Ease.OutBack));
+            sequence.Append(el.DOScale(targetScale, duration).SetEase(Ease.OutBack).OnStart((() =>
+            {
+                if (isStar)
+                {
+                    int random = Random.Range(0, _starAppearSounds.Length);
+                    _audioSource.PlayOneShot(_starAppearSounds[random]);
+                }
+                else
+                {
+                    int random = Random.Range(0, _pathAppearSounds.Length);
+                    _audioSource.PlayOneShot(_pathAppearSounds[random]);
+                }
+            })));
         }
     }
 
@@ -145,7 +169,11 @@ public class LevelsStarsManager : MonoBehaviour
         if (lockImage == null) return;
 
         Sequence explodeSequence = DOTween.Sequence();
-        explodeSequence.Join(lockImage.rectTransform.DOScale(Vector3.one * 2f, 0.5f).SetEase(Ease.OutQuad));
+        explodeSequence.Join(lockImage.rectTransform.DOScale(Vector3.one * 2f, 0.5f).SetEase(Ease.OutQuad)
+            .OnStart((() =>
+            {
+                _audioSource.PlayOneShot(_lockAppearSound);
+            })));
         explodeSequence.Join(lockImage.rectTransform.DORotate(new Vector3(0, 0, 180f), 0.5f, RotateMode.FastBeyond360).SetEase(Ease.OutCubic));
         explodeSequence.Join(lockImage.DOFade(0f, 0.5f).SetEase(Ease.InQuad));
         explodeSequence.OnComplete(() => lockImage.gameObject.SetActive(false));
