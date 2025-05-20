@@ -30,6 +30,8 @@ public class GameController : MonoBehaviour
     private bool _clickProcessedThisFrame;
     private bool _isPowerupShowButton;
     private bool _isPowerupSlowRoulette;
+
+    private float _rouletteStartSpeed;
     
     private float punchScale = 0.35f;
     private float duration = 0.3f;
@@ -50,6 +52,8 @@ public class GameController : MonoBehaviour
             button.GetComponent<NumberButton>().OnGood += ShakeRoulette;
             button.GetComponent<NumberButton>().OnBad += ShakeRoulette;
         }
+        
+        _rouletteStartSpeed = _rouletteController._rotateSpeed;
 
         _rouletteController.OnStartSpin += StartGame;
     }
@@ -173,7 +177,7 @@ public class GameController : MonoBehaviour
                 .SetEase(Ease.InOutBounce)
                 .OnComplete(() =>
                 {
-                    DOTween.To(() => _rouletteController._rotateSpeed, x => _rouletteController._rotateSpeed = x, currentSpeed, 15f);
+                    DOTween.To(() => _rouletteController._rotateSpeed, x => _rouletteController._rotateSpeed = x, _rouletteStartSpeed, 15f);
                     DOTween.To(() => _audioSync._audioSource.pitch, x => _audioSync._audioSource.pitch = x, currentPitch, 15f)
                         .OnComplete(() =>
                         {
