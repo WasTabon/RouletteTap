@@ -15,7 +15,10 @@ public class GameController : MonoBehaviour
     [SerializeField] private SidePanelController _sidePanelController;
     [SerializeField] private AudioSync _audioSync;
     [SerializeField] private Transform _roulette;
-
+    [SerializeField] private AudioClip _showButtonSound;
+    [SerializeField] private AudioClip _changeNumberSound;
+    
+    private AudioSource _audioSource;
     private Vector3 _rouletteSize;
 
     private NumberButton _buttonWithParticle;
@@ -35,6 +38,7 @@ public class GameController : MonoBehaviour
 
     private void Start()
     {
+        _audioSource = GetComponent<AudioSource>();
         foreach (Transform button in _rouletteController.GetButtons())
         {
             button.GetComponent<NumberButton>().OnGood += _uiController.AnimateAndUpdateTapText;
@@ -117,6 +121,7 @@ public class GameController : MonoBehaviour
             sequence.AppendCallback(() =>
             {
                 _uiController._buttons[buttonIndex]._particle.gameObject.SetActive(true);
+                _audioSource.PlayOneShot(_showButtonSound);
             });
 
             sequence.Append(_uiController._buttons[buttonIndex]._particle
@@ -180,6 +185,7 @@ public class GameController : MonoBehaviour
 
     public void HandlePowerupChangeNumber()
     {
+        _audioSource.PlayOneShot(_changeNumberSound);
         _uiController.AnimateAndUpdateTapText();
     }
 
