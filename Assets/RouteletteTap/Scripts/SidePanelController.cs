@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using DG.Tweening;
 using UnityEngine.UI;
@@ -24,6 +23,9 @@ public class SidePanelController : MonoBehaviour
     [Header("Sound Effects")]
     [SerializeField] private AudioSource _audioSource;
     [SerializeField] private AudioClip _openSound;
+    [SerializeField] private AudioClip _showButtonSound;
+    [SerializeField] private AudioClip _slideSound;
+    [SerializeField] private AudioClip[] _hideButtonSounds;
     [SerializeField] private AudioClip _closeSound;
 
     private Vector2 _hiddenPosition;
@@ -82,6 +84,10 @@ public class SidePanelController : MonoBehaviour
         _canvasGroup.blocksRaycasts = true;
 
         _sidePanel.DOAnchorPos(_visiblePosition, _slideDuration).SetEase(_ease)
+            .OnStart((() =>
+            {
+                _audioSource.PlayOneShot(_slideSound);
+            }))
             .OnComplete(() =>
             {
                 Sequence buttonsSeq = DOTween.Sequence();
@@ -99,7 +105,12 @@ public class SidePanelController : MonoBehaviour
                         _sidePanel.DOShakeAnchorPos(0.1f, 8f, 10, 90f);
                     });
 
-                    buttonsSeq.Append(button.DOScale(new Vector3(0.8f, 1.2f, 1f), 0.15f).SetEase(Ease.OutBack));
+                    buttonsSeq.Append(button.DOScale(new Vector3(0.8f, 1.2f, 1f), 0.15f).SetEase(Ease.OutBack)
+                        .OnStart((() =>
+                        {
+                            int random = Random.Range(0, _hideButtonSounds.Length);
+                            _audioSource.PlayOneShot(_hideButtonSounds[random]);
+                        })));
                     buttonsSeq.Join(button.DOLocalMove(jumpPos, 0.2f).SetEase(Ease.OutQuad));
                     buttonsSeq.Join(button.DORotate(new Vector3(0, 0, Random.Range(-15f, 15f)), 0.2f));
 
@@ -136,7 +147,12 @@ public class SidePanelController : MonoBehaviour
                 _sidePanel.DOShakeAnchorPos(0.1f, 8f, 10, 90f);
             });
 
-            buttonsSeq.Append(button.DOScale(new Vector3(1.4f, 0.6f, 1f), 0.15f).SetEase(Ease.OutQuad));
+            buttonsSeq.Append(button.DOScale(new Vector3(1.4f, 0.6f, 1f), 0.15f).SetEase(Ease.OutQuad)
+                .OnStart((() =>
+                {
+                    int random = Random.Range(0, _hideButtonSounds.Length);
+                    _audioSource.PlayOneShot(_hideButtonSounds[random]);
+                })));
             buttonsSeq.Join(button.DOLocalMove(jumpUpPos, 0.2f).SetEase(Ease.OutQuad));
             buttonsSeq.Join(button.DORotate(new Vector3(0, 0, Random.Range(-20f, 20f)), 0.2f));
 
@@ -150,6 +166,7 @@ public class SidePanelController : MonoBehaviour
             _sidePanel.DOShakeAnchorPos(0.2f, 10f, 15, 90f)
                 .OnComplete(() =>
                 {
+                    _audioSource.PlayOneShot(_slideSound);
                     _canvasGroup.DOFade(0f, 0.3f);
                     _canvasGroup.interactable = false;
                     _canvasGroup.blocksRaycasts = false;
@@ -193,7 +210,7 @@ public class SidePanelController : MonoBehaviour
         seq.AppendInterval(0.2f);
 
         // (опционально) звук при появлении
-        if (_audioSource && _openSound)
-            _audioSource.PlayOneShot(_openSound);
+        if (_audioSource && _showButtonSound)
+            _audioSource.PlayOneShot(_showButtonSound);
     }
 }
