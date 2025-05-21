@@ -68,13 +68,13 @@ public class ScrollViewAnimator : MonoBehaviour
 
         isScrolling = speed > scrollSpeedThreshold;
 
-        AnimateVisibleObjects(levelsAndStars);
+        AnimateVisibleObjects(levelsAndStars, true);
         AnimateVisibleObjects(pathObjects);
 
         lastContentAnchoredPos = scrollRect.content.anchoredPosition;
     }
 
-    void AnimateVisibleObjects(List<RectTransform> objects)
+    void AnimateVisibleObjects(List<RectTransform> objects, bool isStar = false)
     {
         foreach (var obj in objects)
         {
@@ -82,8 +82,11 @@ public class ScrollViewAnimator : MonoBehaviour
             {
                 if (!appeared.Contains(obj))
                 {
-                    if (!originalScales.ContainsKey(obj))
-                        originalScales[obj] = obj.localScale == Vector3.zero ? Vector3.one : obj.localScale;
+                    if (!isStar)
+                    {
+                        if (!originalScales.ContainsKey(obj))
+                            originalScales[obj] = obj.localScale == Vector3.zero ? Vector3.one : obj.localScale;
+                    }
 
                     obj.localScale = Vector3.zero;
 
@@ -95,7 +98,7 @@ public class ScrollViewAnimator : MonoBehaviour
                 }
                 else
                 {
-                    if (obj.localScale != originalScales[obj])
+                    if (obj.localScale != originalScales[obj] && !isStar)
                     {
                         originalScales[obj] = obj.localScale;
                     }
