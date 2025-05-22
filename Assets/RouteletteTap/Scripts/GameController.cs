@@ -1,6 +1,7 @@
 using System;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
@@ -17,6 +18,9 @@ public class GameController : MonoBehaviour
     [SerializeField] private Transform _roulette;
     [SerializeField] private AudioClip _showButtonSound;
     [SerializeField] private AudioClip _changeNumberSound;
+    [SerializeField] private Image _fade;
+    
+    private Tween _fadeTween;
     
     private AudioSource _audioSource;
     private Vector3 _rouletteSize;
@@ -164,10 +168,10 @@ public class GameController : MonoBehaviour
             _isPowerupSlowRoulette = true;
             float currentSpeed = _rouletteController._rotateSpeed;
             float slowSpeed = currentSpeed / 2.5f;
-            
+
             float currentPitch = _audioSync._audioSource.pitch;
             float slowPitch = 0.5f;
-            
+
             _rouletteController._rotateSpeed = slowSpeed;
 
             DOTween.To(() => _rouletteController._rotateSpeed, x => _rouletteController._rotateSpeed = x, slowSpeed, 3f)
@@ -178,13 +182,41 @@ public class GameController : MonoBehaviour
                 .OnComplete(() =>
                 {
                     DOTween.To(() => _rouletteController._rotateSpeed, x => _rouletteController._rotateSpeed = x, _rouletteStartSpeed, 15f);
+
                     DOTween.To(() => _audioSync._audioSource.pitch, x => _audioSync._audioSource.pitch = x, currentPitch, 15f)
                         .OnComplete(() =>
                         {
                             _isPowerupSlowRoulette = false;
+                            StopFadeBlinking();
                         });
                 });
+
+            StartFadeBlinking();
         }
+    }
+    
+    private void StartFadeBlinking()
+    {
+        _fadeTween?.Kill();
+
+        Color startColor = _fade.color;
+        startColor.a = 0;
+
+        _fade.color = startColor;
+
+        _fadeTween = _fade.DOFade(0.4f, 0.6f)
+            .SetEase(Ease.InOutSine)
+            .SetLoops(-1, LoopType.Yoyo);
+    }
+
+    private void StopFadeBlinking()
+    {
+        _fadeTween?.Kill();
+        _fadeTween = null;
+
+        Color endColor = _fade.color;
+        endColor.a = 0;
+        _fade.color = endColor;
     }
 
     public void HandlePowerupChangeNumber()
