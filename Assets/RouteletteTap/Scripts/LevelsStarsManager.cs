@@ -57,6 +57,11 @@ public class LevelsStarsManager : MonoBehaviour
             {
                 
                 List<RectTransform> pathElementss = GetTaggedChildren(_levelPath[i], "Path");
+                List<RectTransform> noPathElementss = GetTaggedChildren(_levelPath[i], "NoPath");
+                foreach (RectTransform rectTransform in noPathElementss)
+                {
+                    rectTransform.localScale = Vector3.zero;
+                }
                 foreach (var pathEl in pathElementss)
                 {
                     pathEl.localScale = Vector3.one;
@@ -114,6 +119,8 @@ public class LevelsStarsManager : MonoBehaviour
             if (_level < _levelPath.Length)
             {
                 List<RectTransform> pathElements = GetTaggedChildren(_levelPath[_level], "Path");
+                List<RectTransform> noPathElements = GetTaggedChildren(_levelPath[_level], "NoPath");
+                AnimateElements(noPathElements, Vector3.zero, 0f);
                 AnimateElements(pathElements, pathElements[0].localScale);
 
                 DOTween.Sequence().AppendInterval(pathElements.Count * 0.5f).OnComplete(() =>
