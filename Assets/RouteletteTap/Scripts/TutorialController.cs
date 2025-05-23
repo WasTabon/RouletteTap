@@ -4,6 +4,7 @@ using UnityEngine.UI;
 public class TutorialController : MonoBehaviour
 {
     [SerializeField] private GameObject _tutorialWindow;
+    [SerializeField] private GameObject _playWindow;
     [SerializeField] private Button _button;
 
     private void Start()
@@ -11,6 +12,7 @@ public class TutorialController : MonoBehaviour
         if (!PlayerPrefs.HasKey("tutorial"))
         {
             _tutorialWindow.SetActive(true);
+            _playWindow.SetActive(true);
             _button.onClick.AddListener(SetTutorialOff);
         }
     }

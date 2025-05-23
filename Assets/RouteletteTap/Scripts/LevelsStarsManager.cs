@@ -17,6 +17,8 @@ public class LevelsStarsManager : MonoBehaviour
     private int _level;
     private int _stars;
 
+    private int _modifier = 1;
+
     private void Start()
     {
         _audioSource = GetComponent<AudioSource>();
@@ -27,7 +29,18 @@ public class LevelsStarsManager : MonoBehaviour
         {
             _level = PlayerPrefs.GetInt("level");
             _stars = PlayerPrefs.GetInt("stars");
+            
+            if (_level >= 4)
+            {
+                _modifier = PlayerPrefs.GetInt("modifier");
+                _level += _modifier;
+                _modifier++;
+                PlayerPrefs.SetInt("modifier", _modifier);
+                PlayerPrefs.Save();
+            }
 
+            Debug.Log($"Level = {_level} Stars = {_stars}");
+            
             PlayerPrefs.DeleteKey("level");
             PlayerPrefs.DeleteKey("stars");
 
@@ -42,6 +55,7 @@ public class LevelsStarsManager : MonoBehaviour
             int stars = PlayerPrefs.GetInt($"level_stars_{i}", 0);
             if (stars > 0)
             {
+                Debug.Log($"level_stars_{i}");
                 List<RectTransform> levelStars = GetTaggedChildren(_levels[i], "Star");
 
                 for (int j = 0; j < stars && j < levelStars.Count; j++)

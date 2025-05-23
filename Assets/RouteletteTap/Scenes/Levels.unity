@@ -1895,8 +1895,8 @@ RectTransform:
   - {fileID: 1065425009}
   m_Father: {fileID: 410451796}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: -1.2081357}
-  m_AnchorMax: {x: 1.0018761, y: 0.80102104}
+  m_AnchorMin: {x: 0, y: -1.4226437}
+  m_AnchorMax: {x: 1, y: 1.0000165}
   m_AnchoredPosition: {x: 0.5, y: 0.5}
   m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -2694,7 +2694,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &408794966
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2800,15 +2800,14 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1015014992}
   - {fileID: 279809292}
   m_Father: {fileID: 1164522575}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -17, y: 0}
-  m_Pivot: {x: 0, y: 1}
+  m_AnchorMin: {x: -0.00046125468, y: 0.00041084635}
+  m_AnchorMax: {x: 0.98476416, y: 1.0012325}
+  m_AnchoredPosition: {x: 0.5, y: 0.5}
+  m_SizeDelta: {x: 1, y: 1}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &410451797
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3285,6 +3284,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1233143683}
+  - {fileID: 1015014992}
   - {fileID: 1164522575}
   m_Father: {fileID: 699872462}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -7277,12 +7277,12 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 410451796}
+  m_Father: {fileID: 449712150}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.000000018466135, y: 0.8010539}
-  m_AnchorMax: {x: 1.0018762, y: 0.9999999}
+  m_AnchorMin: {x: 0.000000018466135, y: 0.843229}
+  m_AnchorMax: {x: 0.9898149, y: 1.0010415}
   m_AnchoredPosition: {x: 0.5, y: 0.5}
-  m_SizeDelta: {x: 1, y: 1}
+  m_SizeDelta: {x: 1, y: 1.0000305}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1015014993
 MonoBehaviour:
@@ -8418,10 +8418,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 279809292}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.0009354065, y: 0.000010587486}
-  m_AnchorMax: {x: 1, y: 1.0000156}
+  m_AnchorMin: {x: 0.0009354157, y: 0.0000052095747}
+  m_AnchorMax: {x: 1.0056119, y: 1.000337}
   m_AnchoredPosition: {x: 0.5, y: 0.5}
-  m_SizeDelta: {x: 0.9999833, y: 1}
+  m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1065425010
 MonoBehaviour:
@@ -8977,6 +8977,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _tutorialWindow: {fileID: 449712149}
+  _playWindow: {fileID: 408794965}
   _button: {fileID: 1233143684}
 --- !u!4 &1134379799
 Transform:
@@ -9146,7 +9147,7 @@ RectTransform:
   m_Father: {fileID: 449712150}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.20989583}
-  m_AnchorMax: {x: 1.0018518, y: 1}
+  m_AnchorMax: {x: 1.0037036, y: 0.84375}
   m_AnchoredPosition: {x: 0.5, y: 0.5}
   m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -9162,7 +9163,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1aa08ab6e0800fa44ae55d278d1423e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Content: {fileID: 0}
+  m_Content: {fileID: 279809292}
   m_Horizontal: 0
   m_Vertical: 1
   m_MovementType: 1
@@ -9612,7 +9613,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.38333336, y: 0.06505435}
   m_AnchorMax: {x: 0.61944443, y: 0.19744565}
-  m_AnchoredPosition: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0.5, y: 0.49987793}
   m_SizeDelta: {x: 1.0000019, y: 0.9999733}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1233143684
@@ -10851,7 +10852,7 @@ RectTransform:
   m_Father: {fileID: 145046311}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.13666126, y: 0.73382103}
-  m_AnchorMax: {x: 0.86426294, y: 0.8521056}
+  m_AnchorMax: {x: 0.86518717, y: 0.85241}
   m_AnchoredPosition: {x: 0.5, y: 0.5}
   m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -10875,7 +10876,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Temporarily slows down the roulette spin speed
+  m_text: 'Temporarily slows down the roulette spin speed.
+
+    But each time you
+    use it, the roulette spins faster afterward'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 60c95b4f7c1910d4db5abc12f6867f0a, type: 2}
   m_sharedMaterial: {fileID: 7533848437881577099, guid: 60c95b4f7c1910d4db5abc12f6867f0a, type: 2}
@@ -10902,8 +10906,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 90
-  m_fontSizeBase: 90
+  m_fontSize: 62.15
+  m_fontSizeBase: 62.15
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
