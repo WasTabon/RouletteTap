@@ -1620,8 +1620,8 @@ MonoBehaviour:
   _generalClick: {fileID: 8300000, guid: 04849f74f0ac146498c3d46da1f0604d, type: 3}
   _dontHaveMoney: {fileID: 1017133450}
   _audioController: {fileID: 1281072983}
-  _buttonText: {fileID: 0}
-  _loadingButton: {fileID: 0}
+  _buttonText: {fileID: 562070014}
+  _loadingButton: {fileID: 856689013}
 --- !u!4 &236891223
 Transform:
   m_ObjectHideFlags: 0
@@ -6646,7 +6646,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  button: {fileID: 0}
+  button: {fileID: 521009791}
 --- !u!1 &1015014991
 GameObject:
   m_ObjectHideFlags: 0
