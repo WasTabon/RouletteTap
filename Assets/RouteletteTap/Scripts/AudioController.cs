@@ -15,4 +15,9 @@ public class AudioController : MonoBehaviour
     {
         _audioSource.PlayOneShot(_clickSound);   
     }
+
+    public void PlaySound(AudioClip clip)
+    {
+        _audioSource.PlayOneShot(clip);
+    }
 }
