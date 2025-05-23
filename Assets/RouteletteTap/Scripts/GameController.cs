@@ -19,6 +19,10 @@ public class GameController : MonoBehaviour
     [SerializeField] private AudioClip _showButtonSound;
     [SerializeField] private AudioClip _changeNumberSound;
     [SerializeField] private Image _fade;
+
+    [SerializeField] private GameObject _slowBlack;
+    [SerializeField] private GameObject _showBlack;
+    [SerializeField] private GameObject _changeBlack;
     
     private Tween _fadeTween;
     
@@ -44,6 +48,19 @@ public class GameController : MonoBehaviour
 
     private void Start()
     {
+        if (PlayerPrefs.HasKey("slow"))
+        {
+            _slowBlack.SetActive(false);
+        }
+        if (PlayerPrefs.HasKey("show"))
+        {
+            _showBlack.SetActive(false);
+        }
+        if (PlayerPrefs.HasKey("change"))
+        {
+            _changeBlack.SetActive(false);
+        }
+        
         _audioSource = GetComponent<AudioSource>();
         foreach (Transform button in _rouletteController.GetButtons())
         {
@@ -112,6 +129,7 @@ public class GameController : MonoBehaviour
     public void HandlePowerupShowButton()
     {
         if (_isPowerupShowButton) return;
+        if (_showBlack.activeSelf) return;
         
         _isPowerupShowButton = true;
         Vector3 targetSize = new Vector3(0.03f, 0.03f, 0.03f);
@@ -163,6 +181,8 @@ public class GameController : MonoBehaviour
 
     public void HandlePowerupSlowRoulette()
     {
+        if (_slowBlack.activeSelf) return;
+            
         if (!_isPowerupSlowRoulette)
         {
             _isPowerupSlowRoulette = true;
@@ -221,6 +241,8 @@ public class GameController : MonoBehaviour
 
     public void HandlePowerupChangeNumber()
     {
+        if (_changeBlack.activeSelf) return;
+        
         _audioSource.PlayOneShot(_changeNumberSound);
         _uiController.AnimateAndUpdateTapText();
     }
