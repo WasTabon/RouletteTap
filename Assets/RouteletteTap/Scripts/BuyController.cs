@@ -5,6 +5,8 @@ using UnityEngine.Purchasing.Extension;
 
 public class BuyController : MonoBehaviour
 {
+    public GameObject addMoneyPanel;
+    
     [SerializeField] private GameObject _slowButton;
     [SerializeField] private GameObject _showButton;
     [SerializeField] private GameObject _changeButton;
@@ -58,6 +60,7 @@ public class BuyController : MonoBehaviour
         if (product.definition.id == "com.consumable.purchase.first")
         {
             Debug.Log("Complete");
+            addMoneyPanel.SetActive(true);
             _gemsCount += 50;
             PlayerPrefs.SetInt("gems", _gemsCount);
             PlayerPrefs.Save();
